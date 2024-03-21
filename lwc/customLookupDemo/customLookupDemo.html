@@ -1,0 +1,16 @@
+<template>
+    <lightning-card variant="Narrow" title="Lookup Demo" icon-name="standard:record">
+        <div class="slds-m-around_small">
+            <c-custom-lwc-lookup parent-id-field="AccountId" field-name="Name" object-name="Account" search-label="Parent Account"
+                icon-name="standard:account">
+            </c-custom-lwc-lookup>
+            <c-custom-lwc-lookup parent-id-field="ParentId" field-name="CaseNumber" object-name="Case" search-label="Parent Case"
+            icon-name="standard:case">
+        </c-custom-lwc-lookup>
+        </div>
+        
+        <div class="slds-m-around_small">
+
+        </div>
+    </lightning-card>
+</template>
