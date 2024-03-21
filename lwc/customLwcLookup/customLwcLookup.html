@@ -1,0 +1,40 @@
+<template>
+    <div class="slds-m-padding_around slds-listbox slds-scrollable_y">
+    <template lwc:if ={selectedRecord}>
+        <div class="slds-pill-container">
+            
+                <lightning-pill class="pillSize" href="JavaScript:void(0);" label={selectedRecord.Name}
+                name={selectedRecord.Name} onremove={handleRemove}>
+                <lightning-icon icon-name={iconName} alternative-text={objectName} title={objectName}></lightning-icon>
+            </lightning-pill>
+            
+           
+        </div>
+       
+    </template>
+    
+    <template lwc:else>
+        
+        <c-lwc-search-component onsearch={searchHandler} search-label={searchLabel}></c-lwc-search-component> 
+      
+       
+        <template lwc:if ={searchedResults}>
+            <template for:each={searchedResults} for:item="rec">
+                
+                    <ul key={rec.Id} >
+                       
+                        <c-lwc-record-list key={rec.Id} rec={rec} icon-name={iconName} onselected={handleSelect}>
+                        
+                        </c-lwc-record-list>
+                    
+                    </ul>
+               
+            </template>
+    
+        </template>
+        
+       </template>
+    
+    
+    </div>
+</template>

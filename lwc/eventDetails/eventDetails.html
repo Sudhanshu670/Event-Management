@@ -1,0 +1,77 @@
+<template>
+    <lightning-card title="Event Details" variant="Narrow" icon-name="standard:event">
+        <lightning-tabset variant="scoped">
+            <lightning-tab label="Event Details">
+                <div class="slds-m-around_small">
+    
+                    <lightning-record-form record-id={recordId} mode="readonly" layout-type="Full" columns="2" object-api-name="Event__c">
+           
+                    </lightning-record-form>
+                   </div>
+            </lightning-tab>
+            <lightning-tab label="Event Speakers" onactive={handleActive}>
+                <lightning-button
+                variant="brand"
+                label="New Speaker"
+                title="New Speaker"
+                onclick={createSpeaker}
+              ></lightning-button>
+              <br /><br />
+                <template if:true={speakerDetails}>
+                    <lightning-datatable
+                            key-field="id"
+                            show-row-number-column
+                            hide-checkbox-column
+                            data={speakerDetails}
+                            columns={columns}>
+                    </lightning-datatable>
+                   
+                </template>
+                <template if:false={speakerDetails}>
+                    <b>The Event doesnt have any speaker</b>
+                </template>
+                    
+                
+            </lightning-tab>
+            <lightning-tab label="Location" onactive={handleLocationDetails}>
+                <template if:true={locationDetails}>
+                
+                        Landmark-{locationDetails.Location__r.Land_Mark__c}
+                        <lightning-formatted-address
+                        street={locationDetails.Location__r.Street__c}
+                        city={locationDetails.Location__r.City__c}
+                        country={locationDetails.Location__r.Country__c}
+                        province={locationDetails.Location__r.State__c}
+                        postal-code={locationDetails.Location__r.Postal_Code__c}
+                    ></lightning-formatted-address>
+                   
+                    
+                   
+                </template>
+                <template if:false={locationDetails} >
+                    No Location For this Event
+                </template>
+                
+            </lightning-tab>
+            <lightning-tab label="Attendees"  onactive={handleEventAttendee}>
+                <lightning-button
+                variant="brand"
+                label="New Attendee"
+                title="New Attendee"
+                onclick={createAttendee}
+              ></lightning-button>
+                <lightning-datatable
+            key-field="id"
+            data={attendeesList}
+            show-row-number-column
+            hide-checkbox-column
+            columns={columnAtt}
+          >
+          </lightning-datatable>
+            </lightning-tab>
+        </lightning-tabset>
+      
+       
+        
+    </lightning-card>
+</template>
